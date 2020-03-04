@@ -13,6 +13,14 @@ end
 
 class Query < Connector
   scope :active, -> { where(is_draft: false, is_archived: false) }
+  scope :inactive, -> do
+    left_joins(visualizations: { widgets: :dashboard })
+      .where('
+        queries.is_archived = false
+        AND dashboards.is_draft = false
+        AND dashboards.is_archived = false
+      ')
+  end
   has_many :visualizations
 end
 

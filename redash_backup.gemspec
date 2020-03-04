@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Tashiro"]
   spec.email         = ["g4160hc@gmail.com"]
 
-  spec.summary       = 'cli for back up redash queries'
+  spec.summary       = 'Simple Redash\'s query backup tool'
   spec.description   = 'cli for back up redash queries'
   spec.homepage      = 'https://github.com/tashirosota/ruby-redash_backup'
   spec.license       = "MIT"
