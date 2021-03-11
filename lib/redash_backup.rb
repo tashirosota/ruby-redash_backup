@@ -7,7 +7,8 @@ class RedashBackup
     ENV['DATABASE_URL'] = database_url
   end
 
-  def execute(dir = './queries')
+  def execute(dir = nil)
+    dir ||= './queries'
     RedashBackup::Base.export!(dir)
   end
 
