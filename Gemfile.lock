@@ -2,6 +2,9 @@ PATH
   remote: .
   specs:
     redash_backup (0.1.2)
+      activerecord
+      fileutils
+      pg
 
 GEM
   remote: https://rubygems.org/
