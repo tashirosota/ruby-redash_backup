@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    redash_backup (0.2.0)
+    redash_backup (0.3.0)
       activerecord
       fileutils
       pg
