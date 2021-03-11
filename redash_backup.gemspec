@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Tashiro"]
   spec.email         = ["g4160hc@gmail.com"]
 
-  spec.summary       = 'Simple Redash\'s query backup tool'
+  spec.summary       = 'Simple tool for Redash\'s query backup'
   spec.description   = 'cli for back up redash queries'
   spec.homepage      = 'https://github.com/tashirosota/ruby-redash_backup'
   spec.license       = "MIT"
@@ -33,11 +33,4 @@ Gem::Specification.new do |spec|
   spec.bindir        = "exe"
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
-  spec.add_dependency "activerecord", "~> 6.0.2.1"
-  spec.add_dependency "pg", "~> 1.2.2"
-  spec.add_dependency 'fileutils', '~> 0.7.2'
-
-  spec.add_development_dependency "bundler", "~> 1.17"
-  spec.add_development_dependency "rake", "~> 13.0"
-  spec.add_development_dependency "rspec", "~> 3.0"
 end
