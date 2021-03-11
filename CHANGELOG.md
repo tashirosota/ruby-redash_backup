@@ -3,3 +3,6 @@
 
 # 0.1.2
  - export unused queries
+
+# 0.2.2
+ - add raketask
