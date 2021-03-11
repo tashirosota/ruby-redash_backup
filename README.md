@@ -19,41 +19,19 @@ Or install it yourself as:
     $ gem install redash_backup
 
 ## Usage
-### With other than zsh
-- YOUR_REDEDASH_DATABASE_URL is like postgres://username:password@host:port/db
+ - EXPORT_DIR_NAME is optional argument
+ - YOUR_REDEDASH_DATABASE_URL is like postgres://username:password@host:port/database
 
 ```sh
-  rake redash:backup[YOUR_REDEDASH_DATABASE_URL,EXPORT_DIR_NAME]
-  #
+  bundle exec redash_backup YOUR_REDEDASH_DATABASE_URL EXPORT_DIR_NAME
   # export...
   #
-  # ./queries/dashboard1/hoge.sql
-  # ./queries/dashboard1/page.sql
-  # ./queries/dashboard2/poko.sql
-  # ./queries/dashboard2/pako.sql
-  # ./queries/unused/maru.sql
-  # ./queries/unused/batu.sql
+  # Completed export to ./queries/dashboard1/hoge.sql
+  # Completed export to ./queries/dashboard1/page.sql
+  # Completed export to ./queries/dashboard2/poko.sql
+  # Completed export to ./queries/dashboard2/pako.sql
+  # Completed export to ./queries/unused/maru.sql
+  # Completed export to ./queries/unused/batu.sql
   #
   # ※ default export path: './queries'
-  # Can call without 'EXPORT DIR NAME'
-  # ex. rake redash:backup['YOUR REDEDASH DATABASE_URL']
-```
-
-### With zsh
-
-```sh
-  ※ Surround with single quotes
-  rake 'redash:backup[YOUR_REDEDASH_DATABASE_URL,EXPORT_DIR_NAME]'
-  #
-  # export...
-  #
-  # ./queries/dashboard1/hoge.sql
-  # ./queries/dashboard1/page.sql
-  # ./queries/dashboard2/poko.sql
-  # ./queries/dashboard2/pako.sql
-  # ./queries/unused/maru.sql
-  # ./queries/unused/batu.sql
-  #
-  # ※ default export path: './queries'
-  # 
 ```
