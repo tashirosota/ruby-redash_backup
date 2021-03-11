@@ -11,31 +11,31 @@ class RedashBackup::Base
   def export
     FileUtils.rm_r(@dir) if Dir.exist? @dir
     Dir.mkdir(@dir)
-    boards = Dashboard.active.all.find_each
-    boards.each { |board| export_by_board!(board) }
+    Dashboard.active.all.find_each { |board| export_by_board!(board) }
     export_unused_queries!
   end
 
   private
 
   def export_by_board!(board)
-    Dir.mkdir(@dir + '/' + board.name)
+    board_name = board.name.gsub('/', '_')
+    Dir.mkdir(@dir + '/' + board_name)
     board.widgets.each do |widget|
       query = widget.visualization&.query
       next unless query
 
       text = <<~TEXT
-        -- #{board.name}
+        -- #{board_name}
         -- #{query.name}
         -- #{Time.now.strftime('%Y/%m/%d %H:%M')}
 
         #{query.query}
       TEXT
-      File.open(@dir + "/#{board.name}/#{query.name.gsub('/', '_')}.sql", 'w') do |file|
+      File.open(@dir + "/#{board_name}/#{query.name.gsub('/', '_')}.sql", 'w') do |file|
         file.puts text
       end
     end
-    puts "Completed export to #{@dir}/#{board.name}/*.sql"
+    puts "Completed export to #{@dir}/#{board_name}/*.sql"
   end
 
   # unused: queries not attach to dashboard
