@@ -1,0 +1,49 @@
+name: Ruby
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  test:
+    runs-on: ubuntu-20.04
+    services:
+      postgres:
+        image: postgres:12
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+      redash7:
+        image: redash:8.0.2.b37747
+      redash8:
+        image: redash:8.0.2.b37747
+      redash9:
+        image: redash:8.0.2.b37747
+    strategy:
+      fail-fast: false
+      matrix:
+        ruby-version: ['2.5', '2.6', '2.7', '3.0']
+        gemfile:
+          - Gemfile
+        heroku:
+          - postgresql
+    env:
+      DB: "${{ matrix.db }}"
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{ matrix.ruby-version }}
+        bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+    - name: Run tests
+      run: bundle exec rake
+      env:
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: postgres
+        MYSQL_ROOT_PASSWORD: mysql
